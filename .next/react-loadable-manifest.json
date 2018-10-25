@@ -1,0 +1,68 @@
+{
+  "@fortawesome/fontawesome-svg-core/styles.css": [
+    {
+      "id": "./node_modules/@fortawesome/fontawesome-svg-core/styles.css",
+      "name": "./node_modules/@fortawesome/fontawesome-svg-core/styles.css",
+      "file": "static/chunks/styles.js",
+      "publicPath": "static/chunks/styles.js"
+    }
+  ],
+  "undefined": [
+    {
+      "id": 6,
+      "name": null,
+      "file": "static/chunks/styles.js",
+      "publicPath": "static/chunks/styles.js"
+    },
+    {
+      "id": 7,
+      "name": null,
+      "file": "static/chunks/styles.js",
+      "publicPath": "static/chunks/styles.js"
+    },
+    {
+      "id": 10,
+      "name": null,
+      "file": "static/chunks/styles.js",
+      "publicPath": "static/chunks/styles.js"
+    },
+    {
+      "id": 11,
+      "name": null,
+      "file": "static/chunks/styles.js",
+      "publicPath": "static/chunks/styles.js"
+    }
+  ],
+  "@fortawesome/fontawesome-free/css/fontawesome.css": [
+    {
+      "id": "./node_modules/@fortawesome/fontawesome-free/css/fontawesome.css",
+      "name": "./node_modules/@fortawesome/fontawesome-free/css/fontawesome.css",
+      "file": "static/chunks/styles.js",
+      "publicPath": "static/chunks/styles.js"
+    }
+  ],
+  "bootstrap/dist/css/bootstrap.css": [
+    {
+      "id": "./node_modules/bootstrap/dist/css/bootstrap.css",
+      "name": "./node_modules/bootstrap/dist/css/bootstrap.css",
+      "file": "static/chunks/styles.js",
+      "publicPath": "static/chunks/styles.js"
+    }
+  ],
+  "../styles/main.scss": [
+    {
+      "id": "./styles/main.scss",
+      "name": "./styles/main.scss",
+      "file": "static/chunks/styles.js",
+      "publicPath": "static/chunks/styles.js"
+    }
+  ],
+  "/Users/filipjerga/portfel/noop": [
+    {
+      "id": "./node_modules/next/dist/client/noop.js",
+      "name": "./node_modules/next/dist/client/noop.js",
+      "file": "static/chunks/0.js",
+      "publicPath": "static/chunks/0.js"
+    }
+  ]
+}
