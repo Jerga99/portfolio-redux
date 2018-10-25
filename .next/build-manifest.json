@@ -13,13 +13,13 @@
       "static/runtime/webpack.js",
       "static/runtime/main.js"
     ],
-    "/blogDetail": [
+    "/index": [
       "static/runtime/webpack.js",
       "static/css/styles.chunk.css",
       "static/chunks/styles.js",
       "static/runtime/main.js"
     ],
-    "/index": [
+    "/blogListing": [
       "static/runtime/webpack.js",
       "static/css/styles.chunk.css",
       "static/chunks/styles.js",

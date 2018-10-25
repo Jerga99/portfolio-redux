@@ -88,7 +88,7 @@ module.exports =
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 6);
+/******/ 	return __webpack_require__(__webpack_require__.s = 3);
 /******/ })
 /************************************************************************/
 /******/ ({
@@ -950,12 +950,6 @@ function (_React$Component) {
         className: "row"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "col-md-6"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_addons_css_transition_group__WEBPACK_IMPORTED_MODULE_2___default.a, {
-        transitionName: "example",
-        transitionAppear: true,
-        transitionAppearTimeout: 500,
-        transitionEnter: false,
-        transitionLeave: false
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "hero-section"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -986,7 +980,7 @@ function (_React$Component) {
         className: "shadow-custom"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "shadow-inner"
-      }, " "))))))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      }, " ")))))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "col-md-6 hero-welcome-wrapper"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "hero-welcome-text"
@@ -1520,7 +1514,7 @@ var auth0Client = new Auth();
 
 /***/ }),
 
-/***/ 6:
+/***/ 3:
 /*!******************************!*\
   !*** multi ./pages/index.js ***!
   \******************************/

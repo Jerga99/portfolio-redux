@@ -50,12 +50,6 @@ class Index extends React.Component {
           <div className="container">
             <div className="row">
               <div className="col-md-6">
-                <ReactCSSTransitionGroup
-                  transitionName="example"
-                  transitionAppear={true}
-                  transitionAppearTimeout={500}
-                  transitionEnter={false}
-                  transitionLeave={false}>
                   <div className="hero-section">
                     <div className={`flipper ${activeScreen === 0 ? 'isActive' : ''}`}>
                       <div className="front">
@@ -85,7 +79,6 @@ class Index extends React.Component {
                       </div>
                     </div>
                   </div>
-                </ReactCSSTransitionGroup>
               </div>
               <div className="col-md-6 hero-welcome-wrapper">
                 <div className="hero-welcome-text">

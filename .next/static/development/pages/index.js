@@ -73332,12 +73332,6 @@ function (_React$Component) {
         className: "row"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "col-md-6"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_addons_css_transition_group__WEBPACK_IMPORTED_MODULE_2___default.a, {
-        transitionName: "example",
-        transitionAppear: true,
-        transitionAppearTimeout: 500,
-        transitionEnter: false,
-        transitionLeave: false
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "hero-section"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -73368,7 +73362,7 @@ function (_React$Component) {
         className: "shadow-custom"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "shadow-inner"
-      }, " "))))))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      }, " ")))))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "col-md-6 hero-welcome-wrapper"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "hero-welcome-text"
@@ -73906,20 +73900,6 @@ var auth0Client = new Auth();
 
 /***/ }),
 
-/***/ 14:
-/*!******************************!*\
-  !*** multi ./pages/index.js ***!
-  \******************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-__NEXT_REGISTER_PAGE('/', function() {
-module.exports = __webpack_require__(/*! ./pages/index.js */"./pages/index.js");
-
-return { page: module.exports.default }});
-
-/***/ }),
-
 /***/ 2:
 /*!**********************!*\
   !*** util (ignored) ***!
@@ -73964,6 +73944,20 @@ return { page: module.exports.default }});
 
 /***/ }),
 
+/***/ 9:
+/*!******************************!*\
+  !*** multi ./pages/index.js ***!
+  \******************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+__NEXT_REGISTER_PAGE('/', function() {
+module.exports = __webpack_require__(/*! ./pages/index.js */"./pages/index.js");
+
+return { page: module.exports.default }});
+
+/***/ }),
+
 /***/ "dll-reference dll_5d62d38be3592dca3a42":
 /*!*******************************************!*\
   !*** external "dll_5d62d38be3592dca3a42" ***!
@@ -73975,5 +73969,5 @@ module.exports = dll_5d62d38be3592dca3a42;
 
 /***/ })
 
-},[[14,"static/runtime/webpack.js","styles"]]]));;
+},[[9,"static/runtime/webpack.js","styles"]]]));;
 //# sourceMappingURL=index.js.map
