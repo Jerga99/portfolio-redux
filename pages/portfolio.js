@@ -21,7 +21,7 @@ class Portfolio extends Component {
     // const data = await res.json();
     try {
       console.log(req);
-      const data = await actions.getPortfoliosServer(req);
+      const data = await actions.getPortfolios(req);
 
       return { portfolios: data.portfolios };
     } catch(err) {
