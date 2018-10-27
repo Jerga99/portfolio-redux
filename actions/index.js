@@ -18,7 +18,7 @@ const setAuthHeader = () => {
 }
 
 const extractUrl = (req) => {
-   return req ? `${req.protocol}://${req.get('Host')}/api/v1` : '';
+   return req ? `${req.protocol}://${req.get('Host')}` : '';
 }
 
 //---------------------- AUTH ----------------------------

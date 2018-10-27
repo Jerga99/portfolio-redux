@@ -142,7 +142,7 @@ var setAuthHeader = function setAuthHeader() {
 };
 
 var extractUrl = function extractUrl(req) {
-  return req ? "".concat(req.protocol, "://").concat(req.get('Host'), "/api/v1") : '';
+  return req ? "".concat(req.protocol, "://").concat(req.get('Host')) : '';
 }; //---------------------- AUTH ----------------------------
 
 

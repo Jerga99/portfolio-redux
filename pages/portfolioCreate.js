@@ -4,6 +4,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import PortfolioCreateForm from '../components/portfolio/PortfolioForm';
 import Cookie from 'js-cookie';
 import { connect } from 'react-redux';
+import withAuth from '../components/hoc/withAuth';
 
 import * as actions from '../actions';
 
@@ -50,4 +51,4 @@ class PortfolioCreate extends React.Component {
   }
 }
 
-export default PortfolioCreate;
+export default withAuth(PortfolioCreate);

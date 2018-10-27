@@ -8,6 +8,7 @@ import PortfolioItem from '../components/portfolio/PortfolioItem';
 import PortfolioCard from '../components/portfolio/PortfolioCard';
 
 import { Link } from '../routes';
+import { connect } from 'react-redux';
 
 import * as actions from '../actions';
 
@@ -43,15 +44,19 @@ class Portfolio extends Component {
   }
 
   render() {
+    const { auth: {isLoadingAuthState, isAuth} } = this.props;
+
     return (
       <BaseLayout title={'Filip Jerga Full Portfolio'}>
         <section className="portfolio-page">
           <div className="container">
             <div className="page-header">
               <h1 className="portfolio-page-title">PORTFOLIOS</h1>
-              <Link route='/portfolio/new'>
-                <FontAwesomeIcon className="portfolio-page-plus"  icon="plus-circle" />
-              </Link>
+              { !isLoadingAuthState && isAuth &&
+                <Link route='/portfolio/new'>
+                  <FontAwesomeIcon className="portfolio-page-plus"  icon="plus-circle" />
+                </Link>
+              }
             </div>
             <div className="row">
               {this.renderPortfolios()}
@@ -63,4 +68,10 @@ class Portfolio extends Component {
   }
 }
 
-export default Portfolio;
+const mapStateToProps = (state) => {
+  return {
+    auth: state.auth
+  }
+}
+
+export default connect(mapStateToProps)(Portfolio);

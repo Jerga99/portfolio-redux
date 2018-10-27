@@ -5,7 +5,7 @@ import fetch from 'isomorphic-unfetch';
 
 class Auth {
   constructor() {
-    const redirectUri = process.env.NODE_ENV === 'production' ? 'https://port-fel.herokuapp.com/' : 'http://localhost:3000';
+    const redirectUri = process.env.NODE_ENV === 'production' ? 'https://port-fel.herokuapp.com' : 'http://localhost:3000';
 
     this.auth0 = new auth0.WebAuth({
       // the following three lines MUST be updated
