@@ -5,19 +5,9 @@ import { connect } from 'react-redux';
 
 import * as actions from '../actions';
 
+import FbComment from '../components/FbComment';
+
 class BlogDetail extends React.Component {
-
-  // static async getInitialProps() {
-
-  //   try {
-  //     const data = await actions.getBlogByIdServer();
-
-  //     return { blog: data };
-  //   } catch(err) {
-
-  //     return { err }
-  //   }
-  // }
 
   constructor(props) {
     super(props);
@@ -28,12 +18,13 @@ class BlogDetail extends React.Component {
   }
 
   static async getInitialProps({reduxStore, query, req}) {
-
+    console.log(req);
+      const url = req ? `${req.protocol}://${req.get('Host')}${req.originalUrl}` : null;
 
     try {
       const blog = await actions.getBlogBySlug(req, query.slug);
 
-      return { blog };
+      return { blog, url };
     } catch(err) {
 
       return { err }
@@ -53,6 +44,8 @@ class BlogDetail extends React.Component {
   render() {
     const { blog } = this.props;
 
+    const url = this.props.url || window.location.href;
+
     return (
       <BaseLayout>
         <section className='blogDetail-page'>
@@ -62,6 +55,7 @@ class BlogDetail extends React.Component {
               <div className="col-md-8 offset-md-2">
                 <div dangerouslySetInnerHTML={{ __html: blog.story }}>
                 </div>
+                <FbComment url={url}/>
               </div>
             </div>
           </div>

@@ -7,9 +7,9 @@ const PortfolioCtrl = require('../controllers/portfolio');
 
 router.get('', PortfolioCtrl.getPortfolios);
 
-router.post('', auth.checkJwt, PortfolioCtrl.createPortfolio);
+router.post('', auth.checkJwt, auth.checkSuperAdmin, PortfolioCtrl.createPortfolio);
 
-router.get('/secret', auth.checkJwt, PortfolioCtrl.getSecret);
+router.get('/secret', auth.checkJwt, auth.checkSuperAdmin, PortfolioCtrl.getSecret);
 
 module.exports = router;
 

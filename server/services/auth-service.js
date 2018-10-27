@@ -1,6 +1,8 @@
 const jwt = require('express-jwt');
 const jwksRsa = require('jwks-rsa');
 
+const namespace = 'https://portfel.com/';
+
 exports.checkJwt = jwt({
   secret: jwksRsa.expressJwtSecret({
     cache: true,
@@ -16,7 +18,15 @@ exports.checkJwt = jwt({
 
 // exports.checkJwt;
 
+exports.checkSuperAdmin = (req, res, next) => {
+  const user = req.user;
 
+  if (user && (user[namespace + 'role'] === 'admin')) {
+    next();
+  } else {
+    return res.status(401).send([{title: 'Not Authirized', detail: 'Not Sufictient Rights'}]);
+  }
+}
 
 // getToken: function fromHeaderOrQuerystring (req) {
 //     if (req.headers.authorization && req.headers.authorization.split(' ')[0] === 'Bearer') {

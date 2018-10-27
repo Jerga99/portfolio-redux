@@ -4,13 +4,14 @@
 /*!**************************!*\
   !*** ./actions/index.js ***!
   \**************************/
-/*! exports provided: authSuccess, authFail, createPortfolio, getPortfolios, getAllBlogs, getBlogById, getBlogBySlug, getMyBlogs, saveBlog, updateBlog, deleteBlog */
+/*! exports provided: authSuccess, authFail, getCv, createPortfolio, getPortfolios, getAllBlogs, getBlogById, getBlogBySlug, getMyBlogs, saveBlog, updateBlog, deleteBlog */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "authSuccess", function() { return authSuccess; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "authFail", function() { return authFail; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getCv", function() { return getCv; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "createPortfolio", function() { return createPortfolio; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getPortfolios", function() { return getPortfolios; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getAllBlogs", function() { return getAllBlogs; });
@@ -62,6 +63,13 @@ var authFail = function authFail() {
   return {
     type: _types__WEBPACK_IMPORTED_MODULE_2__["AUTH_FAIL"]
   };
+}; //---------------------- CV ----------------------------
+
+var getCv = function getCv(req) {
+  var url = req ? "".concat(req.protocol, "://").concat(req.get('Host')) : '';
+  return axios__WEBPACK_IMPORTED_MODULE_0___default.a.get("".concat(url, "/jerga_cv.pdf")).then(function (response) {
+    return response.data;
+  });
 }; //---------------------- PORTFOLIOS ----------------------------
 
 var createPortfolio = function createPortfolio(portfolio) {
@@ -58125,12 +58133,13 @@ function () {
   function Auth() {
     _classCallCheck(this, Auth);
 
+    var redirectUri =  false ? undefined : 'http://localhost:3000';
     this.auth0 = new auth0_js__WEBPACK_IMPORTED_MODULE_1__["default"].WebAuth({
       // the following three lines MUST be updated
       domain: 'eincode.eu.auth0.com',
       audience: 'https://eincode.eu.auth0.com/userinfo',
       clientID: 'N1hKhhP0PacJO4EjIWURIcnzBt88P3Q1',
-      redirectUri: 'http://localhost:3000/callback',
+      redirectUri: "".concat(redirectUri, "/callback"),
       responseType: 'token id_token',
       scope: 'openid profile app_metadata'
     });

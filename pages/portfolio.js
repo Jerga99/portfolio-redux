@@ -44,7 +44,7 @@ class Portfolio extends Component {
 
   render() {
     return (
-      <BaseLayout>
+      <BaseLayout title={'Filip Jerga Full Portfolio'}>
         <section className="portfolio-page">
           <div className="container">
             <div className="page-header">

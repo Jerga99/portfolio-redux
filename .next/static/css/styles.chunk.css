@@ -13138,6 +13138,21 @@ html, body {
 .absolute {
   position: absolute; }
 
+.social-icons {
+  width: 57px;
+  position: absolute;
+  top: 40vh;
+  right: 20px; }
+  .social-icons .fas {
+    color: #404040; }
+  .social-icons .fa-lg {
+    font-size: 30px; }
+  .social-icons > ul {
+    list-style: none; }
+  .social-icons > i {
+    margin: 10px;
+    font-size: 50px; }
+
 .port-navbar {
   width: 100%;
   z-index: 15;
@@ -13161,9 +13176,9 @@ html, body {
     font-size: 18px;
     text-transform: uppercase; }
     .port-navbar .nav-link.active {
-      color: #18BC9C; }
+      color: #dba919; }
     .port-navbar .nav-link:hover, .port-navbar .nav-link:focus {
-      color: #18BC9C; }
+      color: #dba919; }
   .port-navbar .port-logo {
     color: white; }
 
@@ -13201,12 +13216,13 @@ html, body {
 .main-section {
   top: 150px;
   width: 100%;
-  position: absolute; }
+  padding: 150px 0 0; }
 
 .self-typed {
   font-weight: bold;
   font-size: 31px;
-  letter-spacing: 2px; }
+  letter-spacing: 2px;
+  color: white; }
 
 .typed-cursor {
   color: white !important; }
@@ -13246,8 +13262,10 @@ html, body {
 .hero-welcome-bio {
   margin-top: 20px;
   color: white; }
-  .hero-welcome-bio .social-icons > i {
-    margin: 10px; }
+  .hero-welcome-bio .fa-stack {
+    font-size: 28px; }
+  .hero-welcome-bio .list-inline-item > a {
+    color: #373737; }
 
 .hero-welcome-wrapper {
   justify-content: flex-end; }
@@ -13329,7 +13347,7 @@ html, body {
 .brand {
   min-height: 20vh;
   margin-top: 0vh;
-  color: #fff;
+  color: black;
   text-align: left; }
 
 .fadein {
@@ -13351,17 +13369,21 @@ html, body {
 .title {
   -webkit-animation-delay: 0.7s;
   -moz-animation-delay: 0.7s;
-  animation-delay: 0.7s; }
+  animation-delay: 0.7s;
+  font-size: 42px;
+  font-weight: bold; }
 
 .subTitle {
   -webkit-animation-delay: 2.2s;
   -moz-animation-delay: 2.2s;
-  animation-delay: 2.2s; }
+  animation-delay: 2.2s;
+  font-size: 33px; }
 
 .subsubTitle {
   -webkit-animation-delay: 3.6s;
   -moz-animation-delay: 3.6s;
-  animation-delay: 3.6s; }
+  animation-delay: 3.6s;
+  font-size: 18px; }
 
 @keyframes fadein {
   from {
@@ -13369,29 +13391,22 @@ html, body {
   to {
     opacity: 1; } }
 
-.right-side {
+.myStory {
   -webkit-animation-delay: 4.6s;
   -moz-animation-delay: 4.6s;
-  animation-delay: 4.6s; }
-
-/* === right-side ===*/
-.wall {
-  height: 100%;
-  width: 100%;
-  background-color: #fff;
-  color: #000;
-  border-radius: 15px; }
-
-/* === wall content ===*/
-.wall .section {
-  padding: 20px;
-  text-align: center; }
+  animation-delay: 4.6s;
+  padding-top: 100px; }
+  .myStory-content .intro {
+    font-size: 21px; }
 
 /* intro */
 .section.intro {
   /*
   any spacial css for this section
   */ }
+  .section.intro h2 {
+    font-weight: bold;
+    font-size: 43px; }
 
 /* =======================================
 2- Small devices (landscape phones, 576px and up)
@@ -13420,10 +13435,6 @@ html, body {
     min-height: 40vh;
     margin-top: 30vh; }
   /* === wall ===*/
-  .wall {
-    height: calc(85vh);
-    overflow-x: hidden !important;
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23); }
   /* === wall content ===*/
   /* intro */
   .section.intro {
@@ -13440,7 +13451,8 @@ html, body {
 
 .bio-page {
   min-height: 100vh;
-  padding: 130px 0; }
+  padding: 150px 0 0;
+  background-color: #fff; }
 
 .mainNav {
   padding-top: 1rem;
@@ -13457,11 +13469,11 @@ html, body {
       font-weight: bold;
       padding: 20px; }
       .mainNav .navbar-nav li.nav-item a.nav-link:hover {
-        color: #18BC9C; }
+        color: #dba919; }
       .mainNav .navbar-nav li.nav-item a.nav-link:active, .mainNav .navbar-nav li.nav-item a.nav-link:focus {
-        color: #18BC9C; }
+        color: #dba919; }
       .mainNav .navbar-nav li.nav-item a.nav-link.active {
-        color: #18BC9C; }
+        color: #dba919; }
   .mainNav .navbar-toggler {
     font-size: 80%;
     padding: 0.8rem; }
@@ -13481,9 +13493,9 @@ html, body {
     .mainNav .navbar-nav {
       margin-top: 0; }
     .mainNav .navbar-nav > li.nav-item > a.nav-link.active {
-      color: #18BC9C; }
+      color: #dba919; }
       .mainNav .navbar-nav > li.nav-item > a.nav-link.active:active, .mainNav .navbar-nav > li.nav-item > a.nav-link.active:focus, .mainNav .navbar-nav > li.nav-item > a.nav-link.active:hover {
-        color: #18BC9C; }
+        color: #dba919; }
   .mainNav.navbar-shrink {
     padding-top: 0.5rem;
     padding-bottom: 0.5rem; }
@@ -13492,7 +13504,7 @@ html, body {
 
 .portfolio-page {
   min-height: 100vh;
-  padding: 150px 0;
+  padding: 150px 0 0;
   background-color: #ecedee; }
   .portfolio-page-title {
     font-weight: 700;
@@ -13554,7 +13566,7 @@ html, body {
 
 .portfolioCreate-page {
   min-height: 100vh;
-  padding: 150px 0;
+  padding: 150px 0 0;
   background-color: #ecedee; }
 
 .blogListing-page {
@@ -13670,7 +13682,7 @@ footer {
 
 .blogCreate-page {
   min-height: 100vh;
-  padding: 150px 0;
+  padding: 150px 0 0;
   background-color: #ecedee; }
 
 .editor {

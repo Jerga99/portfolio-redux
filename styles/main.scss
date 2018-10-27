@@ -39,6 +39,30 @@ html, body {
   position: absolute;
 }
 
+.social-icons {
+  width: 57px;
+  position: absolute;
+  top: 40vh;
+  right: 20px;
+
+  .fas {
+    color: #404040;
+  }
+
+  .fa-lg {
+    font-size: 30px;
+  }
+
+  > ul {
+    list-style: none;
+  }
+
+  > i {
+    margin: 10px;
+    font-size: 50px;
+  }
+}
+
 // HEADER
 .port-navbar {
   width: 100%;
@@ -71,11 +95,11 @@ html, body {
     text-transform: uppercase;
 
     &.active {
-      color: $primary;
+      color: #dba919;
     }
 
     &:hover, &:focus {
-      color: $primary;
+      color: #dba919;
     }
   }
 
@@ -114,13 +138,14 @@ html, body {
 .main-section {
   top: 150px;
   width: 100%;
-  position: absolute;
+  padding: 150px 0 0;
 }
 
 .self-typed {
   font-weight: bold;
   font-size: 31px;
   letter-spacing: 2px;
+  color: white;
 }
 
 .typed-cursor {
@@ -173,10 +198,13 @@ html, body {
   margin-top: 20px;
   color: white;
 
-  .social-icons {
+  .fa-stack {
+    font-size: 28px;
+  }
 
-    > i {
-      margin: 10px;
+  .list-inline-item {
+    > a {
+      color: #373737;
     }
   }
 }
@@ -264,8 +292,6 @@ html, body {
 }
 
 
-
-
 .page-container {
   margin-bottom: 3vh;
   margin-top: 2vh;
@@ -289,7 +315,7 @@ html, body {
   min-height: 20vh;
   margin-top: 0vh;
 
-  color: #fff;
+  color: black;
   text-align: left;
 }
 
@@ -311,18 +337,22 @@ html, body {
     -webkit-animation-delay: 0.7s;
     -moz-animation-delay: 0.7s;
     animation-delay: 0.7s;
+    font-size: 42px;
+    font-weight: bold;
   }
 
   .subTitle {
     -webkit-animation-delay: 2.2s;
     -moz-animation-delay:2.2s;
     animation-delay: 2.2s;
+    font-size: 33px;
   }
 
   .subsubTitle {
     -webkit-animation-delay: 3.6s;
     -moz-animation-delay: 3.6s;
     animation-delay: 3.6s;
+    font-size: 18px;
   }
 
   @keyframes fadein {
@@ -330,34 +360,30 @@ html, body {
     to   { opacity: 1; }
   }
 
-.right-side {
+.myStory {
   -webkit-animation-delay: 4.6s;
     -moz-animation-delay: 4.6s;
     animation-delay: 4.6s;
-}
 
-/* === right-side ===*/
-.wall {
-  height: 100%;
-  width: 100%;
+    padding-top: 100px;
 
-  background-color: #fff;
-  color: #000;
+    &-content {
+      .intro {
+        font-size: 21px;
+      }
+    }
+ }
 
-  border-radius: 15px;
-}
 
-/* === wall content ===*/
-.wall .section {
-  padding: 20px;
-
-  text-align: center;
-}
 /* intro */
 .section.intro {
   /*
   any spacial css for this section
   */
+  h2 {
+    font-weight: bold;
+    font-size: 43px;
+  }
 }
 /* =======================================
 2- Small devices (landscape phones, 576px and up)
@@ -404,10 +430,10 @@ html, body {
 
 /* === wall ===*/
 .wall {
-  height: calc(85vh);
-  overflow-x: hidden!important;
+  // height: calc(85vh);
+  // overflow-x: hidden!important;
 
-  box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
+  // box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
 }
 
 /* === wall content ===*/
@@ -442,7 +468,8 @@ html, body {
 .bio-page {
   // background-color: #18bc9c;
   min-height: 100vh;
-  padding: 130px 0;
+  padding: 150px 0 0;
+  background-color: $white;
 }
 
 
@@ -466,14 +493,14 @@ html, body {
         font-weight: bold;
         padding: 20px;
         &:hover {
-          color: $primary;
+          color: #dba919;
         }
         &:active,
         &:focus {
-          color: $primary;
+          color: #dba919;
         }
         &.active {
-          color: $primary;
+          color: #dba919;
         }
       }
     }
@@ -500,12 +527,12 @@ html, body {
       margin-top: 0;
     }
     .navbar-nav > li.nav-item > a.nav-link.active {
-      color: $primary;
+      color: #dba919;
 
       &:active,
       &:focus,
       &:hover {
-        color: $primary;
+        color: #dba919;
       }
     }
   }
@@ -523,7 +550,7 @@ html, body {
 // PORTFOLIO
 .portfolio-page {
   min-height: 100vh;
-  padding: 150px 0;
+  padding: 150px 0 0;
   background-color: #ecedee;
 
   &-title {
@@ -612,7 +639,7 @@ html, body {
 
 .portfolioCreate-page {
   min-height: 100vh;
-  padding: 150px 0;
+  padding: 150px 0 0;
   background-color: #ecedee;
 }
 
@@ -781,7 +808,7 @@ footer {
 // Blog Create
 .blogCreate-page {
   min-height: 100vh;
-  padding: 150px 0;
+  padding: 150px 0 0;
   background-color: #ecedee;
 }
 

@@ -6,17 +6,17 @@ const BlogCtrl = require('../controllers/blog');
 
 router.get('', BlogCtrl.getBlogs);
 
-router.get('/me',  auth.checkJwt, BlogCtrl.getUserBlogs);
+router.get('/me',  auth.checkJwt, auth.checkSuperAdmin, BlogCtrl.getUserBlogs);
 
 router.get('/:slug', BlogCtrl.getBlogBySlug);
 
-router.get('/me/:id', auth.checkJwt, BlogCtrl.getBlogById);
+router.get('/me/:id', auth.checkJwt, auth.checkSuperAdmin, BlogCtrl.getBlogById);
 
-router.post('/new', auth.checkJwt, BlogCtrl.saveBlog);
+router.post('/new', auth.checkJwt, auth.checkSuperAdmin, BlogCtrl.saveBlog);
 
-router.patch('/:id', auth.checkJwt, BlogCtrl.updateBlog);
+router.patch('/:id', auth.checkJwt, auth.checkSuperAdmin, BlogCtrl.updateBlog);
 
-router.delete('/:id', auth.checkJwt, BlogCtrl.deleteBlog);
+router.delete('/:id', auth.checkJwt, auth.checkSuperAdmin, BlogCtrl.deleteBlog);
 
 module.exports = router;
 

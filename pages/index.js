@@ -3,8 +3,10 @@ import React from 'react';
 import BaseLayout from '../components/BaseLayout.js';
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group'; // ES6
 
-import Typist from 'react-typist';
-import TypistLoop from 'react-typist-loop';
+// import Typist from 'react-typist';
+// import TypistLoop from '../components/TypistLoop';
+
+import Typed from 'react-typed';
 
 class Index extends React.Component {
 
@@ -19,32 +21,66 @@ class Index extends React.Component {
 
     this.screens = 2;
     this.currentScreen = 0;
+    this.cardAnimationInterval;
   }
 
   componentDidMount() {
     this.animatePage();
   }
 
+  componentWillUnmount() {
+    clearInterval(this.cardAnimationInterval);
+  }
+
   animatePage() {
     const self = this;
 
-    setInterval(() => {
+    this.cardAnimationInterval = setInterval(() => {
       if (self.currentScreen === self.screens) self.currentScreen = 0;
 
       self.setState({activeScreen: self.currentScreen})
       self.currentScreen++;
-    }, 20000);
+    }, 10000);
   }
 
   render() {
     const { activeScreen } = this.state;
 
     return (
-      <BaseLayout headerType={'landing'} className={`cover cover-${activeScreen}`}>
+      <BaseLayout canonical={true} headerType={'landing'} className={`cover cover-${activeScreen}`}>
       <div>
         <div className="main-section">
           <div className="background-image">
-            <img src="/static/images/background.png" />
+            <img src="/static/images/back5.png" />
+          </div>
+
+          <div className="social-icons">
+            <ul className="list-inline text-center">
+              <li>
+                <a href="#">
+                  <span className="fa-stack fa-lg">
+                    <i className="fas fa-circle fa-stack-2x"></i>
+                    <i className="fab fa-twitter fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+              <li>
+                <a href="#">
+                  <span className="fa-stack fa-lg">
+                    <i className="fas fa-circle fa-stack-2x"></i>
+                    <i className="fab fa-facebook-f fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+              <li>
+                <a href="#">
+                  <span className="fa-stack fa-lg">
+                    <i className="fas fa-circle fa-stack-2x"></i>
+                    <i className="fab fa-github fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+            </ul>
           </div>
 
           <div className="container">
@@ -85,23 +121,23 @@ class Index extends React.Component {
                   <h1>
                     Welcome to the Luxembourgish Platform for Creatives from all Branches.
                     Get informed, collaborate, meet and discover our best developers in the World!
-                    <TypistLoop interval={500}>
-                      {this.roles.map(role =>
-                        <Typist key={role} startDelay={200}><span className="self-typed">{role}.</span>
-                          <Typist.Backspace count={role.length + 1} delay={1000} />
-                        </Typist>
-                      )}
-                    </TypistLoop>
                   </h1>
+                  <Typed
+                      loop
+                      typeSpeed={70}
+                      backSpeed={70}
+                      strings={this.roles}
+                      smartBackspace
+                      backDelay={1000}
+                      loopCount={-1}
+                      showCursor
+                      cursorChar="|"
+                      className="self-typed"
+                    />
                 </div>
                 <div className="hero-welcome-bio">
                   <h1>
                     Let's take a look on my work.
-                    <div className="social-icons">
-                      <i class="fab fa-facebook-square"></i>
-                      <i class="fab fa-linkedin-in"></i>
-                      <i class="fab fa-google-plus-g"></i>
-                    </div>
                   </h1>
                 </div>
               </div>
@@ -184,5 +220,12 @@ export default Index
 // export default Index;
 
 
+// <TypistLoop interval={1000}>
+// {this.roles.map(role =>
+// <Typist key={role} startDelay={200}><span className="self-typed">{role}.</span>
+// <Typist.Backspace count={role.length + 1} delay={2000} />
+// </Typist>
+// )}
+// </TypistLoop>
 
 

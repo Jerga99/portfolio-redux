@@ -49,7 +49,7 @@
       "publicPath": "static/chunks/styles.js"
     }
   ],
-  "../styles/main.scss": [
+  "/Users/filipjerga/styles/main.scss": [
     {
       "id": "./styles/main.scss",
       "name": "./styles/main.scss",

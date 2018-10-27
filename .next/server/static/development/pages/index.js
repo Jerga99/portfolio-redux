@@ -97,13 +97,14 @@ module.exports =
 /*!**************************!*\
   !*** ./actions/index.js ***!
   \**************************/
-/*! exports provided: authSuccess, authFail, createPortfolio, getPortfolios, getAllBlogs, getBlogById, getBlogBySlug, getMyBlogs, saveBlog, updateBlog, deleteBlog */
+/*! exports provided: authSuccess, authFail, getCv, createPortfolio, getPortfolios, getAllBlogs, getBlogById, getBlogBySlug, getMyBlogs, saveBlog, updateBlog, deleteBlog */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "authSuccess", function() { return authSuccess; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "authFail", function() { return authFail; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getCv", function() { return getCv; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "createPortfolio", function() { return createPortfolio; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getPortfolios", function() { return getPortfolios; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getAllBlogs", function() { return getAllBlogs; });
@@ -155,6 +156,13 @@ var authFail = function authFail() {
   return {
     type: _types__WEBPACK_IMPORTED_MODULE_2__["AUTH_FAIL"]
   };
+}; //---------------------- CV ----------------------------
+
+var getCv = function getCv(req) {
+  var url = req ? "".concat(req.protocol, "://").concat(req.get('Host')) : '';
+  return axios__WEBPACK_IMPORTED_MODULE_0___default.a.get("".concat(url, "/jerga_cv.pdf")).then(function (response) {
+    return response.data;
+  });
 }; //---------------------- PORTFOLIOS ----------------------------
 
 var createPortfolio = function createPortfolio(portfolio) {
@@ -261,7 +269,7 @@ var ActiveLink = function ActiveLink(_ref) {
   var child = react__WEBPACK_IMPORTED_MODULE_1__["Children"].only(children);
   var className = child.props.className || '';
 
-  if (router.pathname === props.route && props.activeClassName) {
+  if (router.asPath === props.route && props.activeClassName) {
     className = "".concat(className, " ").concat(props.activeClassName).trim();
   }
 
@@ -303,13 +311,39 @@ __webpack_require__.r(__webpack_exports__);
 
 var BaseLayout = function BaseLayout(props) {
   var className = props.className,
-      children = props.children;
+      children = props.children,
+      canonical = props.canonical;
   var headerType = props.headerType || 'normal';
-  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(next_head__WEBPACK_IMPORTED_MODULE_1___default.a, null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("title", null, "Jerga Website"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("meta", {
+  var title = props.title || 'Filip Jerga Personal Website and Portfolio';
+  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(next_head__WEBPACK_IMPORTED_MODULE_1___default.a, null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("title", null, title), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("meta", {
     name: "viewport",
     content: "initial-scale=1.0, width=device-width"
   }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("meta", {
-    charset: "utf-8"
+    charSet: "utf-8"
+  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("meta", {
+    name: "keywords",
+    content: "Programming, Freelancing, Portfolio, Filip jerga"
+  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("meta", {
+    name: "description",
+    content: "My name is Filip Jerga and I am an experienced software engineer and freelance developer. I have a Master's degree in Artificial Intelligence and several years of experience working on a wide range of technologies and projects from C++ development for ultrasound devices to modern mobile and web applications in React and Angular. Throughout my career, I have acquired advanced technical knowledge and the ability to explain programming topics clearly and in detail to a broad audience. I invite you to take my course, where I have put a lot of effort to explain web and software engineering concepts in a detailed, hands-on and understandable way."
+  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("meta", {
+    property: "og:title",
+    content: "Filip Jerga - programmer, contractor, blogger"
+  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("meta", {
+    property: "og:locale",
+    content: "en_EU"
+  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("meta", {
+    property: "og:url",
+    content: "https://port-fel.herokuapp.com"
+  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("meta", {
+    property: "og:type",
+    content: "website"
+  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("meta", {
+    property: "og:description",
+    content: "Programmer portfolio, personal site by Filip Jerga, good blog and more. Java, web developer and mobile application developer. Blog about programming."
+  }), canonical && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("link", {
+    href: "https://port-fel.herokuapp.com",
+    rel: "canonical"
   }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("link", {
     href: "https://fonts.googleapis.com/icon?family=Material+Icons",
     rel: "stylesheet"
@@ -317,7 +351,7 @@ var BaseLayout = function BaseLayout(props) {
     rel: "stylesheet",
     href: "https://use.fontawesome.com/releases/v5.4.1/css/all.css",
     integrity: "sha384-5sAR7xN1Nv6T6+dT2mhtzEpVJvfS3NScPQTrOxhwjIuvcA67KV2R5Jz6kr4abQsz",
-    crossorigin: "anonymous"
+    crossOrigin: "anonymous"
   })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "layout-container"
   }, headerType === 'normal' && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_common_Header__WEBPACK_IMPORTED_MODULE_2__["default"], {
@@ -332,7 +366,7 @@ var BaseLayout = function BaseLayout(props) {
   }, children))));
 };
 
-/* harmony default export */ __webpack_exports__["default"] = (BaseLayout);
+/* harmony default export */ __webpack_exports__["default"] = (BaseLayout); // image <meta property="og:image" content="http://mateuszzbylut.com/img/Mateusz-Zbylut.png">
 
 /***/ }),
 
@@ -557,10 +591,10 @@ function (_React$Component) {
         className: "nav-link"
       }, " Portfolio "))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_8__["NavItem"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_ActiveLink__WEBPACK_IMPORTED_MODULE_4__["default"], {
         activeClassName: "active",
-        route: "/contact"
+        route: "/cv"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
         className: "nav-link"
-      }, " Contact "))), !isLoadingAuthState && !isAuth && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_8__["NavItem"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Login__WEBPACK_IMPORTED_MODULE_1__["default"], {
+      }, " CV "))), !isLoadingAuthState && !isAuth && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_8__["NavItem"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Login__WEBPACK_IMPORTED_MODULE_1__["default"], {
         actionEl: function actionEl(_ref) {
           var toggle = _ref.toggle;
           return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_8__["NavLink"], {
@@ -865,10 +899,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_BaseLayout_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../components/BaseLayout.js */ "./components/BaseLayout.js");
 /* harmony import */ var react_addons_css_transition_group__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-addons-css-transition-group */ "react-addons-css-transition-group");
 /* harmony import */ var react_addons_css_transition_group__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(react_addons_css_transition_group__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var react_typist__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-typist */ "react-typist");
-/* harmony import */ var react_typist__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(react_typist__WEBPACK_IMPORTED_MODULE_3__);
-/* harmony import */ var react_typist_loop__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react-typist-loop */ "react-typist-loop");
-/* harmony import */ var react_typist_loop__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(react_typist_loop__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var react_typed__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-typed */ "react-typed");
+/* harmony import */ var react_typed__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(react_typed__WEBPACK_IMPORTED_MODULE_3__);
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -890,7 +922,8 @@ function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || func
 
 
  // ES6
-
+// import Typist from 'react-typist';
+// import TypistLoop from '../components/TypistLoop';
 
 
 
@@ -911,6 +944,7 @@ function (_React$Component) {
     _this.roles = ['Developer', 'Designer', 'Project Leader', 'Course Creator', 'Tech Lover'];
     _this.screens = 2;
     _this.currentScreen = 0;
+    _this.cardAnimationInterval;
     return _this;
   }
 
@@ -920,22 +954,28 @@ function (_React$Component) {
       this.animatePage();
     }
   }, {
+    key: "componentWillUnmount",
+    value: function componentWillUnmount() {
+      clearInterval(this.cardAnimationInterval);
+    }
+  }, {
     key: "animatePage",
     value: function animatePage() {
       var self = this;
-      setInterval(function () {
+      this.cardAnimationInterval = setInterval(function () {
         if (self.currentScreen === self.screens) self.currentScreen = 0;
         self.setState({
           activeScreen: self.currentScreen
         });
         self.currentScreen++;
-      }, 20000);
+      }, 10000);
     }
   }, {
     key: "render",
     value: function render() {
       var activeScreen = this.state.activeScreen;
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_BaseLayout_js__WEBPACK_IMPORTED_MODULE_1__["default"], {
+        canonical: true,
         headerType: 'landing',
         className: "cover cover-".concat(activeScreen)
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -943,8 +983,36 @@ function (_React$Component) {
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "background-image"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
-        src: "/static/images/background.png"
+        src: "/static/images/back5.png"
       })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "social-icons"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
+        className: "list-inline text-center"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
+        href: "#"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+        className: "fa-stack fa-lg"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+        className: "fas fa-circle fa-stack-2x"
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+        className: "fab fa-twitter fa-stack-1x fa-inverse"
+      })))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
+        href: "#"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+        className: "fa-stack fa-lg"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+        className: "fas fa-circle fa-stack-2x"
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+        className: "fab fa-facebook-f fa-stack-1x fa-inverse"
+      })))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
+        href: "#"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+        className: "fa-stack fa-lg"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+        className: "fas fa-circle fa-stack-2x"
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+        className: "fab fa-github fa-stack-1x fa-inverse"
+      })))))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "container"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "row"
@@ -984,29 +1052,20 @@ function (_React$Component) {
         className: "col-md-6 hero-welcome-wrapper"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "hero-welcome-text"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "Welcome to the Luxembourgish Platform for Creatives from all Branches. Get informed, collaborate, meet and discover our best developers in the World!", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_typist_loop__WEBPACK_IMPORTED_MODULE_4___default.a, {
-        interval: 500
-      }, this.roles.map(function (role) {
-        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_typist__WEBPACK_IMPORTED_MODULE_3___default.a, {
-          key: role,
-          startDelay: 200
-        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
-          className: "self-typed"
-        }, role, "."), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_typist__WEBPACK_IMPORTED_MODULE_3___default.a.Backspace, {
-          count: role.length + 1,
-          delay: 1000
-        }));
-      })))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "Welcome to the Luxembourgish Platform for Creatives from all Branches. Get informed, collaborate, meet and discover our best developers in the World!"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_typed__WEBPACK_IMPORTED_MODULE_3___default.a, {
+        loop: true,
+        typeSpeed: 70,
+        backSpeed: 70,
+        strings: this.roles,
+        smartBackspace: true,
+        backDelay: 1000,
+        loopCount: -1,
+        showCursor: true,
+        cursorChar: "|",
+        className: "self-typed"
+      })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "hero-welcome-bio"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "Let's take a look on my work.", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "social-icons"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
-        class: "fab fa-facebook-square"
-      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
-        class: "fab fa-linkedin-in"
-      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
-        class: "fab fa-google-plus-g"
-      }))))))))));
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "Let's take a look on my work."))))))));
     }
   }]);
 
@@ -1062,6 +1121,13 @@ function (_React$Component) {
 // }
 // }
 // export default Index;
+// <TypistLoop interval={1000}>
+// {this.roles.map(role =>
+// <Typist key={role} startDelay={200}><span className="self-typed">{role}.</span>
+// <Typist.Backspace count={role.length + 1} delay={2000} />
+// </Typist>
+// )}
+// </TypistLoop>
 
 /***/ }),
 
@@ -1206,12 +1272,13 @@ function () {
   function Auth() {
     _classCallCheck(this, Auth);
 
+    var redirectUri =  false ? undefined : 'http://localhost:3000';
     this.auth0 = new auth0_js__WEBPACK_IMPORTED_MODULE_1___default.a.WebAuth({
       // the following three lines MUST be updated
       domain: 'eincode.eu.auth0.com',
       audience: 'https://eincode.eu.auth0.com/userinfo',
       clientID: 'N1hKhhP0PacJO4EjIWURIcnzBt88P3Q1',
-      redirectUri: 'http://localhost:3000/callback',
+      redirectUri: "".concat(redirectUri, "/callback"),
       responseType: 'token id_token',
       scope: 'openid profile app_metadata'
     });
@@ -1702,25 +1769,14 @@ module.exports = require("react-redux");
 
 /***/ }),
 
-/***/ "react-typist":
-/*!*******************************!*\
-  !*** external "react-typist" ***!
-  \*******************************/
+/***/ "react-typed":
+/*!******************************!*\
+  !*** external "react-typed" ***!
+  \******************************/
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = require("react-typist");
-
-/***/ }),
-
-/***/ "react-typist-loop":
-/*!************************************!*\
-  !*** external "react-typist-loop" ***!
-  \************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-module.exports = require("react-typist-loop");
+module.exports = require("react-typed");
 
 /***/ }),
 

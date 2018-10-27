@@ -5,12 +5,14 @@ import fetch from 'isomorphic-unfetch';
 
 class Auth {
   constructor() {
+    const redirectUri = process.env.NODE_ENV === 'production' ? 'https://port-fel.herokuapp.com/' : 'http://localhost:3000';
+
     this.auth0 = new auth0.WebAuth({
       // the following three lines MUST be updated
       domain: 'eincode.eu.auth0.com',
       audience: 'https://eincode.eu.auth0.com/userinfo',
       clientID: 'N1hKhhP0PacJO4EjIWURIcnzBt88P3Q1',
-      redirectUri: 'http://localhost:3000/callback',
+      redirectUri: `${redirectUri}/callback`,
       responseType: 'token id_token',
       scope: 'openid profile app_metadata'
     });

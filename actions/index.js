@@ -36,6 +36,14 @@ export const authFail = () => {
   }
 }
 
+//---------------------- CV ----------------------------
+
+export const getCv = (req) => {
+  const url = req ? `${req.protocol}://${req.get('Host')}` : '';
+
+  return axios.get(`${url}/jerga_cv.pdf`).then(response => response.data);
+}
+
 //---------------------- PORTFOLIOS ----------------------------
 
 export const createPortfolio = (portfolio) => {

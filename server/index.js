@@ -3,10 +3,16 @@ const next = require('next')
 const config = require('./config');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
+const path = require('path');
 
 const routes = require('../routes')
 
-// const FakeDb = require('./fake-db');
+const robotsOptions = {
+  root: path.join(__dirname, "../static"),
+  headers: {
+    'Content-Type': 'text/plain;charset=UTF-8',
+  }
+};
 
 const dev = process.env.NODE_ENV !== 'production'
 const app = next({ dev })
@@ -30,6 +36,14 @@ mongoose.connect(config.DB_URI, { useNewUrlParser: true })
 app.prepare()
 .then(() => {
   const server = express();
+
+  server.get('/jerga_cv.pdf', (req, res) => (
+    res.status(200).sendFile('jerga_cv.pdf', robotsOptions)
+  ));
+
+  server.get('/robots.txt', (req, res) => (
+    res.status(200).sendFile('robots.txt', robotsOptions)
+  ));
 
   // MIDDLEWARES
   server.use(bodyParser.json());
