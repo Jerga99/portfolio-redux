@@ -175,6 +175,7 @@ import * as actions from '../actions';
 import { Link } from '../routes';
 import { Button, Popover, PopoverHeader, PopoverBody } from 'reactstrap';
 import PortButtonDropdown from '../components/ButtonDropdown';
+import withAuth from '../components/hoc/withAuth';
 
 class MyBlogs extends React.Component {
 
@@ -325,5 +326,5 @@ const mapStateToProps = (state) => {
   }
 }
 
-export default connect(mapStateToProps)(MyBlogs);
+export default connect(mapStateToProps)(withAuth(MyBlogs));
 

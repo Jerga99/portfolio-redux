@@ -88,7 +88,7 @@ module.exports =
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 6);
+/******/ 	return __webpack_require__(__webpack_require__.s = 5);
 /******/ })
 /************************************************************************/
 /******/ ({
@@ -1569,7 +1569,7 @@ function () {
     key: "signOut",
     value: function signOut() {
       this.auth0.logout({
-        returnTo: 'http://localhost:3000',
+        returnTo: '',
         clientID: 'N1hKhhP0PacJO4EjIWURIcnzBt88P3Q1'
       });
       js_cookie__WEBPACK_IMPORTED_MODULE_2___default.a.remove('jwt');
@@ -1643,7 +1643,7 @@ var auth0Client = new Auth();
 
 /***/ }),
 
-/***/ 6:
+/***/ 5:
 /*!******************************!*\
   !*** multi ./pages/index.js ***!
   \******************************/

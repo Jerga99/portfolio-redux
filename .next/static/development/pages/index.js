@@ -78240,7 +78240,7 @@ function () {
     key: "signOut",
     value: function signOut() {
       this.auth0.logout({
-        returnTo: 'http://localhost:3000',
+        returnTo: '',
         clientID: 'N1hKhhP0PacJO4EjIWURIcnzBt88P3Q1'
       });
       js_cookie__WEBPACK_IMPORTED_MODULE_2___default.a.remove('jwt');
@@ -78303,7 +78303,7 @@ var auth0Client = new Auth();
 
 /***/ }),
 
-/***/ 14:
+/***/ 13:
 /*!******************************!*\
   !*** multi ./pages/index.js ***!
   \******************************/
@@ -78372,5 +78372,5 @@ module.exports = dll_5d62d38be3592dca3a42;
 
 /***/ })
 
-},[[14,"static/runtime/webpack.js","styles"]]]));;
+},[[13,"static/runtime/webpack.js","styles"]]]));;
 //# sourceMappingURL=index.js.map

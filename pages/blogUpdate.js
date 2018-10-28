@@ -8,6 +8,7 @@ import { Editor } from 'slate-react';
 import { Value } from 'slate';
 
 import * as actions from '../actions';
+import withAuth from '../components/hoc/withAuth';
 
 
 class BlogCreate extends React.Component {
@@ -94,4 +95,4 @@ class BlogCreate extends React.Component {
   }
 }
 
-export default BlogCreate;
+export default withAuth(BlogCreate);

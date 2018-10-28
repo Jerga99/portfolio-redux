@@ -58369,7 +58369,7 @@ function () {
     key: "signOut",
     value: function signOut() {
       this.auth0.logout({
-        returnTo: 'http://localhost:3000',
+        returnTo: '',
         clientID: 'N1hKhhP0PacJO4EjIWURIcnzBt88P3Q1'
       });
       js_cookie__WEBPACK_IMPORTED_MODULE_2___default.a.remove('jwt');
