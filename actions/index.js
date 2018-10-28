@@ -2,6 +2,8 @@ import axios from 'axios';
 import Cookie from 'js-cookie';
 import { AUTH_SUCCESS, AUTH_FAIL } from './types';
 
+const namespace = 'https://portfel.com/';
+
 const axiosService = axios.create({
   baseURL: '/api/v1',
   timeout: 2000
@@ -18,7 +20,7 @@ const setAuthHeader = () => {
 }
 
 const extractUrl = (req) => {
-   return req ? `${req.protocol}://${req.get('Host')}` : '';
+   return req ? `${req.protocol}://${req.get('Host')}/api/v1` : '';
 }
 
 //---------------------- AUTH ----------------------------
@@ -51,7 +53,7 @@ export const createPortfolio = (portfolio) => {
 }
 
 export const getPortfolios = (req) => {
-  return axios.get(`${extractUrl(req)}/api/v1/portfolios`)
+  return axiosService.get(`${extractUrl(req)}/portfolios`)
     .then(response => response.data)
     .catch(({response}) => response.data)
 }
@@ -62,16 +64,16 @@ export const getAllBlogs = (req) => {
   return axiosService.get(`${extractUrl(req)}/blogs`).then(response => response.data);
 }
 
+export const getBlogBySlug = (req, slug) => {
+  return axiosService.get(`${extractUrl(req)}/blogs/${slug}`, setAuthHeader()).then(response => response.data);
+}
+
 // export const getAllBlogsServer = (url) => {
 //   return axiosService.get(`${url}/api/v1/blogs`).then(response => response.data);
 // }
 
 export const getBlogById = (userId) => {
   return axiosService.get(`/blogs/me/${userId}`, setAuthHeader()).then(response => response.data);
-}
-
-export const getBlogBySlug = (req, slug) => {
-  return axiosService.get(`${extractUrl(req)}/blogs/${slug}`, setAuthHeader()).then(response => response.data);
 }
 
 // export const getBlogBySlugServer = (req) => {

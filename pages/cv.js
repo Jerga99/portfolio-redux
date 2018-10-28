@@ -35,7 +35,6 @@ class Cv extends React.Component {
   }
 
   render() {
-    debugger;
     const { cv } = this.props;
     const { pageNumber, numPages } = this.state;
 
@@ -46,7 +45,8 @@ class Cv extends React.Component {
             <div className="row">
               <div className="col-md-8 offset-md-2">
                 <div className="cv-title">
-                  <h1 style={{fontWeight: 'bold', textAlign: 'center'}}> GET MY CV  <a download="jerga_cv.pdf" class="btn btn-success" href="/static/jerga_cv.pdf">Download</a></h1>
+                  <h1 style={{fontWeight: 'bold', textAlign: 'center', visibility: 'hidden'}}> GET MY CV </h1>
+                  <a download="jerga_cv.pdf" class="btn btn-success" href="/static/jerga_cv.pdf">Download</a>
                 </div>
 
                 <div>

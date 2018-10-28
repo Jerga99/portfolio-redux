@@ -21,7 +21,6 @@ class Portfolio extends Component {
     // const res = await fetch('http://localhost:3000/api/v1/portfolios');
     // const data = await res.json();
     try {
-      console.log(req);
       const data = await actions.getPortfolios(req);
 
       return { portfolios: data.portfolios };

@@ -103,9 +103,25 @@ html, body {
     }
   }
 
+  .nav-link-drop {
+    color: black;
+  }
+
   .port-logo {
     color: white;
   }
+}
+
+.fas.fa-bars.transparent {
+  color: white;
+}
+
+// .bg-dark {
+//   background-color: transparent !important;
+// }
+
+.drop-open.bg-transparent {
+  background-color: #343a40 !important;
 }
 
 // WRAPPER
@@ -908,4 +924,13 @@ footer {
 .contactPage {
   padding: 150px 0;
   color: white;
+
+  .cv-title {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+
+  .btn {
+    font-size: 30px;
+  }
 }

@@ -97,7 +97,7 @@ module.exports =
 /*!**************************!*\
   !*** ./actions/index.js ***!
   \**************************/
-/*! exports provided: authSuccess, authFail, getCv, createPortfolio, getPortfolios, getAllBlogs, getBlogById, getBlogBySlug, getMyBlogs, saveBlog, updateBlog, deleteBlog */
+/*! exports provided: authSuccess, authFail, getCv, createPortfolio, getPortfolios, getAllBlogs, getBlogBySlug, getBlogById, getMyBlogs, saveBlog, updateBlog, deleteBlog */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -108,8 +108,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "createPortfolio", function() { return createPortfolio; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getPortfolios", function() { return getPortfolios; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getAllBlogs", function() { return getAllBlogs; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getBlogById", function() { return getBlogById; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getBlogBySlug", function() { return getBlogBySlug; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getBlogById", function() { return getBlogById; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getMyBlogs", function() { return getMyBlogs; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "saveBlog", function() { return saveBlog; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "updateBlog", function() { return updateBlog; });
@@ -122,6 +122,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+var namespace = 'https://portfel.com/';
 var axiosService = axios__WEBPACK_IMPORTED_MODULE_0___default.a.create({
   baseURL: '/api/v1',
   timeout: 2000
@@ -142,7 +143,7 @@ var setAuthHeader = function setAuthHeader() {
 };
 
 var extractUrl = function extractUrl(req) {
-  return req ? "".concat(req.protocol, "://").concat(req.get('Host')) : '';
+  return req ? "".concat(req.protocol, "://").concat(req.get('Host'), "/api/v1") : '';
 }; //---------------------- AUTH ----------------------------
 
 
@@ -169,7 +170,7 @@ var createPortfolio = function createPortfolio(portfolio) {
   return axiosService.post('/portfolios', portfolio, setAuthHeader());
 };
 var getPortfolios = function getPortfolios(req) {
-  return axios__WEBPACK_IMPORTED_MODULE_0___default.a.get("".concat(extractUrl(req), "/api/v1/portfolios")).then(function (response) {
+  return axiosService.get("".concat(extractUrl(req), "/portfolios")).then(function (response) {
     return response.data;
   }).catch(function (_ref) {
     var response = _ref.response;
@@ -181,17 +182,17 @@ var getAllBlogs = function getAllBlogs(req) {
   return axiosService.get("".concat(extractUrl(req), "/blogs")).then(function (response) {
     return response.data;
   });
+};
+var getBlogBySlug = function getBlogBySlug(req, slug) {
+  return axiosService.get("".concat(extractUrl(req), "/blogs/").concat(slug), setAuthHeader()).then(function (response) {
+    return response.data;
+  });
 }; // export const getAllBlogsServer = (url) => {
 //   return axiosService.get(`${url}/api/v1/blogs`).then(response => response.data);
 // }
 
 var getBlogById = function getBlogById(userId) {
   return axiosService.get("/blogs/me/".concat(userId), setAuthHeader()).then(function (response) {
-    return response.data;
-  });
-};
-var getBlogBySlug = function getBlogBySlug(req, slug) {
-  return axiosService.get("".concat(extractUrl(req), "/blogs/").concat(slug), setAuthHeader()).then(function (response) {
     return response.data;
   });
 }; // export const getBlogBySlugServer = (req) => {

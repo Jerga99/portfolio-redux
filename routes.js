@@ -2,6 +2,7 @@ const routes = require('next-routes')
 
 module.exports = routes()
   .add('blogListing', '/blogs', 'blogListing')
+  .add('myBlogs', '/blogs/me', 'myBlogs')
   .add('blogCreate', '/blogs/new', 'blogCreate')
   .add('blogDetail', '/blogs/:slug', 'blogDetail')
   .add('blogEdit', '/blogs/:id/edit', 'blogCreate')

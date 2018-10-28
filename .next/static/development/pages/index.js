@@ -4,7 +4,7 @@
 /*!**************************!*\
   !*** ./actions/index.js ***!
   \**************************/
-/*! exports provided: authSuccess, authFail, getCv, createPortfolio, getPortfolios, getAllBlogs, getBlogById, getBlogBySlug, getMyBlogs, saveBlog, updateBlog, deleteBlog */
+/*! exports provided: authSuccess, authFail, getCv, createPortfolio, getPortfolios, getAllBlogs, getBlogBySlug, getBlogById, getMyBlogs, saveBlog, updateBlog, deleteBlog */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -15,8 +15,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "createPortfolio", function() { return createPortfolio; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getPortfolios", function() { return getPortfolios; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getAllBlogs", function() { return getAllBlogs; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getBlogById", function() { return getBlogById; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getBlogBySlug", function() { return getBlogBySlug; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getBlogById", function() { return getBlogById; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getMyBlogs", function() { return getMyBlogs; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "saveBlog", function() { return saveBlog; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "updateBlog", function() { return updateBlog; });
@@ -29,6 +29,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+var namespace = 'https://portfel.com/';
 var axiosService = axios__WEBPACK_IMPORTED_MODULE_0___default.a.create({
   baseURL: '/api/v1',
   timeout: 2000
@@ -49,7 +50,7 @@ var setAuthHeader = function setAuthHeader() {
 };
 
 var extractUrl = function extractUrl(req) {
-  return req ? "".concat(req.protocol, "://").concat(req.get('Host')) : '';
+  return req ? "".concat(req.protocol, "://").concat(req.get('Host'), "/api/v1") : '';
 }; //---------------------- AUTH ----------------------------
 
 
@@ -76,7 +77,7 @@ var createPortfolio = function createPortfolio(portfolio) {
   return axiosService.post('/portfolios', portfolio, setAuthHeader());
 };
 var getPortfolios = function getPortfolios(req) {
-  return axios__WEBPACK_IMPORTED_MODULE_0___default.a.get("".concat(extractUrl(req), "/api/v1/portfolios")).then(function (response) {
+  return axiosService.get("".concat(extractUrl(req), "/portfolios")).then(function (response) {
     return response.data;
   }).catch(function (_ref) {
     var response = _ref.response;
@@ -88,17 +89,17 @@ var getAllBlogs = function getAllBlogs(req) {
   return axiosService.get("".concat(extractUrl(req), "/blogs")).then(function (response) {
     return response.data;
   });
+};
+var getBlogBySlug = function getBlogBySlug(req, slug) {
+  return axiosService.get("".concat(extractUrl(req), "/blogs/").concat(slug), setAuthHeader()).then(function (response) {
+    return response.data;
+  });
 }; // export const getAllBlogsServer = (url) => {
 //   return axiosService.get(`${url}/api/v1/blogs`).then(response => response.data);
 // }
 
 var getBlogById = function getBlogById(userId) {
   return axiosService.get("/blogs/me/".concat(userId), setAuthHeader()).then(function (response) {
-    return response.data;
-  });
-};
-var getBlogBySlug = function getBlogBySlug(req, slug) {
-  return axiosService.get("".concat(extractUrl(req), "/blogs/").concat(slug), setAuthHeader()).then(function (response) {
     return response.data;
   });
 }; // export const getBlogBySlugServer = (req) => {
@@ -248,6 +249,11 @@ var BaseLayout = function BaseLayout(props) {
   }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("meta", {
     property: "og:description",
     content: "Programmer portfolio, personal site by Filip Jerga, good blog and more. Java, web developer and mobile application developer. Blog about programming."
+  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("link", {
+    rel: "icon",
+    href: "/static/images/favicon.ico",
+    sizes: "16x16 32x32",
+    type: "image/ico"
   }), canonical && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("link", {
     href: "https://port-fel.herokuapp.com",
     rel: "canonical"
@@ -419,6 +425,7 @@ function _assertThisInitialized(self) { if (self === void 0) { throw new Referen
 
 
 
+var namespace = 'https://portfel.com/';
 
 var Header =
 /*#__PURE__*/
@@ -431,10 +438,12 @@ function (_React$Component) {
     _classCallCheck(this, Header);
 
     _this = _possibleConstructorReturn(this, _getPrototypeOf(Header).call(this, props));
-    _this.toggle = _this.toggle.bind(_assertThisInitialized(_assertThisInitialized(_this)));
     _this.state = {
-      isOpen: false
+      isOpen: false,
+      dropdownOpen: false
     };
+    _this.toggle = _this.toggle.bind(_assertThisInitialized(_assertThisInitialized(_this)));
+    _this.dropdownToggle = _this.dropdownToggle.bind(_assertThisInitialized(_assertThisInitialized(_this)));
     return _this;
   }
 
@@ -446,11 +455,59 @@ function (_React$Component) {
       });
     }
   }, {
+    key: "dropdownToggle",
+    value: function dropdownToggle() {
+      this.setState({
+        dropdownOpen: !this.state.dropdownOpen
+      });
+    }
+  }, {
     key: "signOut",
     value: function signOut() {
       _services_Auth__WEBPACK_IMPORTED_MODULE_2__["default"].signOut();
       this.props.dispatch(_actions__WEBPACK_IMPORTED_MODULE_6__["authFail"]());
       this.props.router.replace('/');
+    }
+  }, {
+    key: "renderBlog",
+    value: function renderBlog() {
+      var _this$props$auth = this.props.auth,
+          isLoadingAuthState = _this$props$auth.isLoadingAuthState,
+          isAuth = _this$props$auth.isAuth,
+          user = _this$props$auth.user;
+
+      if (!isLoadingAuthState && isAuth && user[namespace + 'role'] === 'admin') {
+        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_8__["Dropdown"], {
+          nav: true,
+          isOpen: this.state.dropdownOpen,
+          toggle: this.dropdownToggle
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_8__["DropdownToggle"], {
+          nav: true,
+          caret: true
+        }, "Blog Menu"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_8__["DropdownMenu"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_8__["DropdownItem"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_routes__WEBPACK_IMPORTED_MODULE_7__["Link"], {
+          route: "/blogs"
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
+          className: "nav-link-drop"
+        }, " Blog Listing "))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_8__["DropdownItem"], {
+          divider: true
+        }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_8__["DropdownItem"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_routes__WEBPACK_IMPORTED_MODULE_7__["Link"], {
+          route: "/blogs/new"
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
+          className: "nav-link-drop"
+        }, " Blog Create "))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_8__["DropdownItem"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_routes__WEBPACK_IMPORTED_MODULE_7__["Link"], {
+          activeClassName: "active",
+          route: "/blogs/me"
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
+          className: "nav-link-drop"
+        }, " My Blogs ")))));
+      }
+
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_8__["NavItem"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_ActiveLink__WEBPACK_IMPORTED_MODULE_4__["default"], {
+        activeClassName: "active",
+        route: "/blogs"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
+        className: "nav-link"
+      }, " Blog ")));
     }
   }, {
     key: "render",
@@ -460,19 +517,24 @@ function (_React$Component) {
       var _this$props = this.props,
           className = _this$props.className,
           color = _this$props.color,
-          _this$props$auth = _this$props.auth,
-          isLoadingAuthState = _this$props$auth.isLoadingAuthState,
-          isAuth = _this$props$auth.isAuth;
+          _this$props$auth2 = _this$props.auth,
+          isLoadingAuthState = _this$props$auth2.isLoadingAuthState,
+          isAuth = _this$props$auth2.isAuth;
+      var isOpen = this.state.isOpen;
+      var dropdownClass = isOpen ? 'drop-open' : 'drop-closed';
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_8__["Navbar"], {
-        className: className,
+        className: "".concat(className, " ").concat(dropdownClass),
         color: color,
         expand: "md"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_8__["NavbarBrand"], {
         className: "port-navbar-brand",
         href: "/"
       }, "Filip Jerga"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_8__["NavbarToggler"], {
-        onClick: this.toggle
-      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_8__["Collapse"], {
+        onClick: this.toggle,
+        className: "mr-2"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+        className: "fas fa-bars transparent"
+      }), " "), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_8__["Collapse"], {
         isOpen: this.state.isOpen,
         navbar: true
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_8__["Nav"], {
@@ -480,10 +542,10 @@ function (_React$Component) {
         navbar: true
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_8__["NavItem"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_ActiveLink__WEBPACK_IMPORTED_MODULE_4__["default"], {
         activeClassName: "active",
-        route: "/blogs"
+        route: "/"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
         className: "nav-link"
-      }, " Blog "))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_8__["NavItem"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_ActiveLink__WEBPACK_IMPORTED_MODULE_4__["default"], {
+      }, " Home "))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_8__["NavItem"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_ActiveLink__WEBPACK_IMPORTED_MODULE_4__["default"], {
         activeClassName: "active",
         route: "/bio"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
@@ -493,7 +555,7 @@ function (_React$Component) {
         route: "/portfolio"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
         className: "nav-link"
-      }, " Portfolio "))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_8__["NavItem"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_ActiveLink__WEBPACK_IMPORTED_MODULE_4__["default"], {
+      }, " Portfolio "))), this.renderBlog(), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_8__["NavItem"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_ActiveLink__WEBPACK_IMPORTED_MODULE_4__["default"], {
         activeClassName: "active",
         route: "/cv"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
@@ -77898,7 +77960,7 @@ function initializeStore(initialState) {
 
 var routes = __webpack_require__(/*! next-routes */ "./node_modules/next-routes/dist/index.js");
 
-module.exports = routes().add('blogListing', '/blogs', 'blogListing').add('blogCreate', '/blogs/new', 'blogCreate').add('blogDetail', '/blogs/:slug', 'blogDetail').add('blogEdit', '/blogs/:id/edit', 'blogCreate').add('bio').add('user', '/user/:id', 'profile').add('portfolioCreate', '/portfolio/new', 'portfolioCreate').add('portfolioDetail', '/portfolio/:id', 'portfolioDetail');
+module.exports = routes().add('blogListing', '/blogs', 'blogListing').add('myBlogs', '/blogs/me', 'myBlogs').add('blogCreate', '/blogs/new', 'blogCreate').add('blogDetail', '/blogs/:slug', 'blogDetail').add('blogEdit', '/blogs/:id/edit', 'blogCreate').add('bio').add('user', '/user/:id', 'profile').add('portfolioCreate', '/portfolio/new', 'portfolioCreate').add('portfolioDetail', '/portfolio/:id', 'portfolioDetail');
 
 /***/ }),
 
@@ -78241,6 +78303,20 @@ var auth0Client = new Auth();
 
 /***/ }),
 
+/***/ 14:
+/*!******************************!*\
+  !*** multi ./pages/index.js ***!
+  \******************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+__NEXT_REGISTER_PAGE('/', function() {
+module.exports = __webpack_require__(/*! ./pages/index.js */"./pages/index.js");
+
+return { page: module.exports.default }});
+
+/***/ }),
+
 /***/ 2:
 /*!**********************!*\
   !*** util (ignored) ***!
@@ -78285,20 +78361,6 @@ var auth0Client = new Auth();
 
 /***/ }),
 
-/***/ 9:
-/*!******************************!*\
-  !*** multi ./pages/index.js ***!
-  \******************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-__NEXT_REGISTER_PAGE('/', function() {
-module.exports = __webpack_require__(/*! ./pages/index.js */"./pages/index.js");
-
-return { page: module.exports.default }});
-
-/***/ }),
-
 /***/ "dll-reference dll_5d62d38be3592dca3a42":
 /*!*******************************************!*\
   !*** external "dll_5d62d38be3592dca3a42" ***!
@@ -78310,5 +78372,5 @@ module.exports = dll_5d62d38be3592dca3a42;
 
 /***/ })
 
-},[[9,"static/runtime/webpack.js","styles"]]]));;
+},[[14,"static/runtime/webpack.js","styles"]]]));;
 //# sourceMappingURL=index.js.map

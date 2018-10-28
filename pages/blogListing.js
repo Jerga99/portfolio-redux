@@ -9,7 +9,6 @@ import * as actions from '../actions';
 class BlogListing extends React.Component {
 
   static async getInitialProps({req}) {
-
     try {
       const data = await actions.getAllBlogs(req);
 
@@ -20,45 +19,33 @@ class BlogListing extends React.Component {
     }
   }
 
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      blogs: []
-    }
-  }
-
-  // componentDidMount() {
-  //   actions.getAllBlogs()
-  //   .then(
-  //     (blogs) => this.setState({blogs}))
-  //   .catch(err => console.error(err));
-  // }
-
   renderBlogs(blogs) {
-    return blogs.map((blog, index) => {
+    if (blogs && blogs.length > 0) {
+      return blogs.map((blog, index) => {
+        return (
+          <React.Fragment key={index}>
+           <div  className="post-preview">
+            <Link route={`/blogs/${blog.slug}`}>
+              <a>
+                <h2 className="post-title">
+                  {blog.title}
+                </h2>
+                <h3 className="post-subtitle">
+                  {blog.subTitle}
+                </h3>
+              </a>
+            </Link>
+            <p className="post-meta">Posted by
+              <a href="#"> {blog.author} </a>
+              {blog.updatedAt && moment(blog.updatedAt).format('LLLL')}</p>
+          </div>
+          <hr></hr>
+          </React.Fragment>
+        )
+      })
+    }
 
-      return (
-        <React.Fragment key={index}>
-         <div  className="post-preview">
-          <Link route={`/blogs/${blog.slug}`}>
-            <a>
-              <h2 className="post-title">
-                {blog.title}
-              </h2>
-              <h3 className="post-subtitle">
-                {blog.subTitle}
-              </h3>
-            </a>
-          </Link>
-          <p className="post-meta">Posted by
-            <a href="#"> {blog.author} </a>
-            {blog.updatedAt && moment(blog.updatedAt).format('LLLL')}</p>
-        </div>
-        <hr></hr>
-        </React.Fragment>
-      )
-    })
+    return null;
   }
 
   render() {

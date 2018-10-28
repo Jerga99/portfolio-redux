@@ -16,6 +16,7 @@ const BaseLayout = (props) => {
     <div>
       <Head>
         <title>{title}</title>
+
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
         <meta charSet="utf-8" />
         <meta name="keywords" content="Programming, Freelancing, Portfolio, Filip jerga"/>
@@ -26,6 +27,7 @@ const BaseLayout = (props) => {
         <meta property="og:type" content="website"/>
         <meta property="og:description" content="Programmer portfolio, personal site by Filip Jerga, good blog and more. Java, web developer and mobile application developer. Blog about programming."/>
 
+        <link rel="icon" href="/static/images/favicon.ico" sizes="16x16 32x32" type="image/ico" />
         {canonical && <link href="https://port-fel.herokuapp.com" rel="canonical"/>}
         <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"/>
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css" integrity="sha384-5sAR7xN1Nv6T6+dT2mhtzEpVJvfS3NScPQTrOxhwjIuvcA67KV2R5Jz6kr4abQsz" crossOrigin="anonymous"/>

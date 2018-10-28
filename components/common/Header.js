@@ -21,22 +21,34 @@ import {
   UncontrolledDropdown,
   DropdownToggle,
   DropdownMenu,
-  DropdownItem } from 'reactstrap';
+  DropdownItem ,
+  Dropdown} from 'reactstrap';
+
+const namespace = 'https://portfel.com/';
 
 class Header extends React.Component {
 
   constructor(props) {
     super(props);
 
-    this.toggle = this.toggle.bind(this);
     this.state = {
-      isOpen: false
+      isOpen: false,
+      dropdownOpen: false
     };
+
+    this.toggle = this.toggle.bind(this);
+    this.dropdownToggle = this.dropdownToggle.bind(this);
   }
 
   toggle() {
     this.setState({
       isOpen: !this.state.isOpen
+    });
+  }
+
+  dropdownToggle() {
+    this.setState({
+      dropdownOpen: !this.state.dropdownOpen
     });
   }
 
@@ -47,21 +59,63 @@ class Header extends React.Component {
     this.props.router.replace('/');
   };
 
-  render() {
-    const { className, color, auth: {isLoadingAuthState, isAuth} } = this.props;
+  renderBlog() {
+    const { auth: {isLoadingAuthState, isAuth, user} } = this.props;
+
+    if (!isLoadingAuthState && isAuth && user[namespace + 'role'] === 'admin') {
+      return (
+        <Dropdown nav isOpen={this.state.dropdownOpen} toggle={this.dropdownToggle}>
+          <DropdownToggle nav caret>
+            Blog Menu
+          </DropdownToggle>
+          <DropdownMenu>
+            <DropdownItem>
+              <Link  route="/blogs">
+                <a className="nav-link-drop"> Blog Listing </a>
+              </Link>
+            </DropdownItem>
+            <DropdownItem divider />
+            <DropdownItem>
+              <Link  route="/blogs/new">
+                <a className="nav-link-drop"> Blog Create </a>
+              </Link>
+            </DropdownItem>
+            <DropdownItem>
+              <Link activeClassName="active" route="/blogs/me">
+                <a className="nav-link-drop"> My Blogs </a>
+              </Link>
+            </DropdownItem>
+          </DropdownMenu>
+        </Dropdown>
+      )
+    }
 
     return (
-        <Navbar className={className} color={color} expand="md">
+      <NavItem>
+        <ActiveLink activeClassName="active" route="/blogs">
+          <a className="nav-link"> Blog </a>
+        </ActiveLink>
+      </NavItem>
+    )
+  }
+
+  render() {
+    const { className, color, auth: {isLoadingAuthState, isAuth} } = this.props;
+    const { isOpen } = this.state;
+
+    const dropdownClass = isOpen ? 'drop-open' : 'drop-closed';
+
+    return (
+        <Navbar className={`${className} ${dropdownClass}`} color={color} expand="md">
           <NavbarBrand className="port-navbar-brand" href="/">Filip Jerga</NavbarBrand>
-          <NavbarToggler onClick={this.toggle} />
+          <NavbarToggler onClick={this.toggle} className="mr-2"><i className="fas fa-bars transparent"></i> </NavbarToggler>
           <Collapse isOpen={this.state.isOpen} navbar>
             <Nav className="ml-auto" navbar>
               <NavItem>
-                <ActiveLink activeClassName="active" route="/blogs">
-                  <a className="nav-link"> Blog </a>
+                <ActiveLink activeClassName="active" route="/">
+                  <a className="nav-link"> Home </a>
                 </ActiveLink>
               </NavItem>
-
               <NavItem>
                 <ActiveLink activeClassName="active" route="/bio">
                   <a className="nav-link"> Bio </a>
@@ -72,6 +126,9 @@ class Header extends React.Component {
                   <a className="nav-link"> Portfolio </a>
                 </ActiveLink>
               </NavItem>
+
+              { this.renderBlog() }
+
               <NavItem>
                 <ActiveLink activeClassName="active" route="/cv">
                   <a className="nav-link"> CV </a>
